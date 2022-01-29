@@ -30,6 +30,8 @@ public final class DoughnutChartData: CTDoughnutChartDataProtocol, Publishable {
     public final var noDataText: Text
     public final var chartType: (chartType: ChartType, dataSetType: DataSetType)
     
+    public var dataFormatter: ((DataPoint) -> (String))?
+    
     // MARK: Initializer
     /// Initialises Doughnut Chart data.
     ///

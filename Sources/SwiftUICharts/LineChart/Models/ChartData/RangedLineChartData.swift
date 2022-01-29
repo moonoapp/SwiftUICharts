@@ -36,6 +36,8 @@ public final class RangedLineChartData: CTLineChartDataProtocol, GetDataProtocol
     public var subscription = SubscriptionSet().subscription
     public let touchedDataPointPublisher = PassthroughSubject<DataPoint,Never>()
     
+    public var dataFormatter: ((DataPoint) -> (String))?
+    
     // MARK: Initializer
     /// Initialises a ranged line chart.
     ///

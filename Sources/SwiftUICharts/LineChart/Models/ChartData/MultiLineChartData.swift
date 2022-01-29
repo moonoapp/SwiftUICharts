@@ -36,6 +36,8 @@ public final class MultiLineChartData: CTLineChartDataProtocol, GetDataProtocol,
     public var subscription = SubscriptionSet().subscription
     public let touchedDataPointPublisher = PassthroughSubject<DataPoint,Never>()
     
+    public var dataFormatter: ((LineChartDataPoint) -> (String))?
+    
     // MARK: Initializers
     /// Initialises a Multi Line Chart.
     ///

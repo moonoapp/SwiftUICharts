@@ -120,6 +120,8 @@ public protocol CTChartData: ObservableObject, Identifiable {
      - Returns: Array of points with the location on screen of data points.
      */
     func getPointLocation(dataSet: SetPoint, touchLocation: CGPoint, chartSize: CGRect) -> CGPoint?
+    
+    var dataFormatter: ((DataPoint) -> (String))? { get set }
 }
 
 // MARK: - Data Sets

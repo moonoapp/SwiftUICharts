@@ -38,6 +38,8 @@ public final class LineChartData: CTLineChartDataProtocol, GetDataProtocol, Publ
     
     internal final var isFilled: Bool = false
     
+    public var dataFormatter: ((DataPoint) -> (String))?
+    
     // MARK: Initializer
     /// Initialises a Single Line Chart.
     ///
@@ -54,7 +56,8 @@ public final class LineChartData: CTLineChartDataProtocol, GetDataProtocol, Publ
         xAxisLabels: [String]? = nil,
         yAxisLabels: [String]? = nil,
         chartStyle: LineChartStyle = LineChartStyle(),
-        noDataText: Text = Text("No Data")
+        noDataText: Text = Text("No Data"),
+        dataFormatter: ((DataPoint) -> (String))? = nil
     ) {
         self.dataSets = dataSets
         self.metadata = metadata
@@ -65,6 +68,7 @@ public final class LineChartData: CTLineChartDataProtocol, GetDataProtocol, Publ
         self.legends = [LegendData]()
         self.viewData = ChartViewData()
         self.chartType = (chartType: .line, dataSetType: .single)
+        self.dataFormatter = dataFormatter
         self.setupLegends()
     }
     

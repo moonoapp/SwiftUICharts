@@ -41,6 +41,8 @@ public final class GroupedBarChartData: CTMultiBarChartDataProtocol, GetDataProt
     
     final var groupSpacing: CGFloat = 0
     
+    public var dataFormatter: ((DataPoint) -> (String))?
+    
     // MARK: Initializer
     /// Initialises a Grouped Bar Chart.
     ///

@@ -72,8 +72,19 @@ extension CTChartData {
     public func infoValueUnit(info: DataPoint) -> some View {
         switch self.infoView.touchUnit {
         case .none:
-            return Text(LocalizedStringKey(info.valueAsString(specifier: infoView.touchSpecifier,
-                                                              formatter: infoView.touchFormatter)))
+            if let dataFormatter = dataFormatter {
+                let string = dataFormatter(info)
+                return Text(string)
+            } else {
+                return Text(
+                    LocalizedStringKey(
+                        info.valueAsString(
+                            specifier: infoView.touchSpecifier,
+                            formatter: infoView.touchFormatter
+                        )
+                    )
+                )
+            }
         case .prefix(of: let unit):
             return Text(LocalizedStringKey(unit + " " + info.valueAsString(specifier: infoView.touchSpecifier,
                                                                            formatter: infoView.touchFormatter)))
