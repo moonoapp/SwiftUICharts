@@ -28,16 +28,17 @@ internal struct HeaderBox<T>: ViewModifier where T: CTChartData {
                 .foregroundColor(chartData.metadata.subtitleColour)
         }
     }
+    
     var touchOverlay: some View {
-        VStack(alignment: .trailing) {
+        VStack(alignment: touchOverlayAlignment) {
             if chartData.infoView.isTouchCurrent {
                 ForEach(chartData.infoView.touchOverlayInfo, id: \.id) { point in
-                    chartData.infoValueUnit(info: point)
-                        .font(chartData.chartStyle.infoBoxValueFont)
-                        .foregroundColor(chartData.chartStyle.infoBoxValueColour)
                     chartData.infoDescription(info: point)
                         .font(chartData.chartStyle.infoBoxDescriptionFont)
                         .foregroundColor(chartData.chartStyle.infoBoxDescriptionColour)
+                    chartData.infoValueUnit(info: point)
+                        .font(chartData.chartStyle.infoBoxValueFont)
+                        .foregroundColor(chartData.chartStyle.infoBoxValueColour)
                 }
             } else {
                 Text("")
@@ -65,18 +66,10 @@ internal struct HeaderBox<T>: ViewModifier where T: CTChartData {
                     }
                 case .header:
                     VStack(alignment: .leading) {
-                        HStack(spacing: 0) {
-                            HStack(spacing: 0) {
-                                titleBox
-                                Spacer()
-                            }
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            Spacer()
-                            HStack(spacing: 0) {
-                                Spacer()
-                                touchOverlay
-                            }
-                            .frame(minWidth: 0, maxWidth: .infinity)
+                        if chartData.infoView.isTouchCurrent {
+                            touchOverlay
+                        } else {
+                            titleBox
                         }
                         content
                     }
@@ -90,6 +83,15 @@ internal struct HeaderBox<T>: ViewModifier where T: CTChartData {
                 }
             } else { content }
             #endif
+        }
+    }
+    
+    private var touchOverlayAlignment: HorizontalAlignment {
+        switch chartData.chartStyle.infoBoxPlacement {
+        case .header:
+            return .leading
+        default:
+            return .trailing
         }
     }
 }
