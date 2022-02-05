@@ -55,7 +55,7 @@ internal struct RotatedText<ChartData>: View where ChartData: CTLineBarChartData
                     Color.clear
                         .onAppear {
                             finalFrame = geo.frame(in: .local)
-                            chartData.viewData.xAxisLabelHeights.append(geo.frame(in: .local).width)
+                            chartData.viewData.xAxisLabelHeights.append(geo.frame(in: .local).height)
                             if rotation == .degrees(0) || rotation == .radians(0) {
                                 chartData.viewData.xAxislabelWidths.append(geo.frame(in: .local).width)
                             } else {
